@@ -56,7 +56,7 @@
       CGContextRotateCTM(context, M_PI);
       CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
     }
-    [window.layer renderInContext:context];
+    [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
     CGContextRestoreGState(context);
   }
   UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
