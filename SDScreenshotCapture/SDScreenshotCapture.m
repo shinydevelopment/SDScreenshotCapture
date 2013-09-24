@@ -22,8 +22,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SDScreenshotCapture.h"
 
-#ifndef __IPHONE_6_0
-#error "This class requires an SDK version of iOS 6.0 or later"
+#ifndef __IPHONE_7_0
+#error "This class requires an SDK version of iOS 7.0 or later"
 #endif
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
@@ -56,7 +56,11 @@
       CGContextRotateCTM(context, M_PI);
       CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
     }
-    [window.layer renderInContext:context];
+    if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+      [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+    } else {
+      [window.layer renderInContext:context];
+    }
     CGContextRestoreGState(context);
   }
   UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
