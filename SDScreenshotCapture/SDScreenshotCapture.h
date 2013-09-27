@@ -25,6 +25,6 @@
 + (void)takeScreenshotToActivityViewController;
 + (void)takeScreenshotToCameraRoll;
 + (void)takeScreenshotToDocumentsDirectory;
-+ (void)takeSCreenshotToDirectoryAtPath:(NSString *)path;
++ (void)takeScreenshotToDirectoryAtPath:(NSString *)path;
 
 @end

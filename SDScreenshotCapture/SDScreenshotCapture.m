@@ -100,10 +100,10 @@
 + (void)takeScreenshotToDocumentsDirectory
 {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    [self takeSCreenshotToDirectoryAtPath:documentsPath];
+    [self takeScreenshotToDirectoryAtPath:documentsPath];
 }
     
-+ (void)takeSCreenshotToDirectoryAtPath:(NSString *)path
++ (void)takeScreenshotToDirectoryAtPath:(NSString *)path
 {
     static NSDateFormatter *dateFormatter = nil;
     if (dateFormatter == nil) {
