@@ -2,7 +2,7 @@
 
 SDScreenshotCapture is a class which can be used to capture a screenshot of the app window which excludes the iOS status bar. It includes methods to grab the screenshot directly as a `UIImage`, share it via a `UIActivityViewController`, save it to the camera roll or write it directly to the app sandbox in the Documents directory.
 
-This class is most useful in combination with [Status Magic](http://shinydevelopment.com/status-magic/) for putting perfect status bars on screenshots ready for use in an App Store listing.
+This is most useful in preparing Launch Images or for preparing your screenshots for the App Store. We wrote it to prepare images for a tool we wrote, [Status Magic](http://shinydevelopment.com/status-magic/) which puts perfect status bars on screenshots ready for use in an App Store listing.
 
 # Usage
 
