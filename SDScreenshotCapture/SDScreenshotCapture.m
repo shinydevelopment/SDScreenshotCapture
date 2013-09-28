@@ -99,17 +99,22 @@
 
 + (void)takeScreenshotToDocumentsDirectory
 {
-  static NSDateFormatter *dateFormatter = nil;
-  if (dateFormatter == nil) {
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"Y-MM-d HH-mm-ss-SSS"];
-  }
-
-  NSData *imageData = [self dataWithScreenshotInPNGFormat];
-  NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-  NSString *imageFileName = [NSString stringWithFormat:@"%@.png", [dateFormatter stringFromDate:[NSDate date]]];
-  NSString *imagePath = [documentsPath stringByAppendingPathComponent:imageFileName];
-  [[NSFileManager defaultManager] createFileAtPath:imagePath contents:imageData attributes:nil];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    [self takeScreenshotToDirectoryAtPath:documentsPath];
+}
+    
++ (void)takeScreenshotToDirectoryAtPath:(NSString *)path
+{
+    static NSDateFormatter *dateFormatter = nil;
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"Y-MM-d HH-mm-ss-SSS"];
+    }
+    
+    NSData *imageData = [self dataWithScreenshotInPNGFormat];
+    NSString *imageFileName = [NSString stringWithFormat:@"%@.png", [dateFormatter stringFromDate:[NSDate date]]];
+    NSString *imagePath = [path stringByAppendingPathComponent:imageFileName];
+    [[NSFileManager defaultManager] createFileAtPath:imagePath contents:imageData attributes:nil];
 }
 
 @end
