@@ -1,5 +1,9 @@
 # SDScreenshotCapture
 
+![MIT Licensed](https://go-shields.herokuapp.com/license-MIT-blue.png)&nbsp;
+![Platform](https://cocoapod-badges.herokuapp.com/p/SDScreenshotCapture/badge.png)&nbsp;
+![Version](https://cocoapod-badges.herokuapp.com/v/SDScreenshotCapture/badge.png)&nbsp;
+
 SDScreenshotCapture is a class which can be used to capture a screenshot of the app window which excludes the iOS status bar. It includes methods to grab the screenshot directly as a `UIImage`, share it via a `UIActivityViewController`, save it to the camera roll or write it directly to the app sandbox in the Documents directory.
 
 This class is most useful on iOS 7 for capturing Launch Images or for preparing your screenshots for the App Store. We wrote it to prepare images for a tool we wrote, [Status Magic](http://shinydevelopment.com/status-magic/) which puts perfect status bars on screenshots ready for use in an App Store listing.
