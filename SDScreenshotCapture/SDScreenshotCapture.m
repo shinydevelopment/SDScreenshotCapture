@@ -56,7 +56,7 @@
       CGContextRotateCTM(context, M_PI);
       CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
     }
-    if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+    if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)] && [window isKindOfClass:NSClassFromString(@"UITextEffectsWindow")] == NO) {
       [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
     } else {
       [window.layer renderInContext:context];
