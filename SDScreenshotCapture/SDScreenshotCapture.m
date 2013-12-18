@@ -77,15 +77,15 @@
 
 + (void)takeScreenshotToActivityViewController
 {
-    if ([UIActivityViewController class] == nil) {
-        NSLog(@"UIActivityViewController is not supported on iOS versions less than 6.0");
-        return;
-    }
-    
-    UIImage *image = [self imageWithScreenshot];
-    UIViewController *topViewController = [self topViewController];
-    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[ image ] applicationActivities:nil];
-    [topViewController presentViewController:controller animated:YES completion:nil];
+  if ([UIActivityViewController class] == nil) {
+    NSLog(@"UIActivityViewController is not supported on iOS versions less than 6.0");
+    return;
+  }
+
+  UIImage *image = [self imageWithScreenshot];
+  UIViewController *topViewController = [self topViewController];
+  UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[ image ] applicationActivities:nil];
+  [topViewController presentViewController:controller animated:YES completion:nil];
 }
 
 + (void)takeScreenshotToCameraRoll
@@ -96,22 +96,22 @@
 
 + (void)takeScreenshotToDocumentsDirectory
 {
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    [self takeScreenshotToDirectoryAtPath:documentsPath];
+  NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+  [self takeScreenshotToDirectoryAtPath:documentsPath];
 }
-    
+
 + (void)takeScreenshotToDirectoryAtPath:(NSString *)path
 {
-    static NSDateFormatter *dateFormatter = nil;
-    if (dateFormatter == nil) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"Y-MM-d HH-mm-ss-SSS"];
-    }
-    
-    NSData *imageData = [self dataWithScreenshotInPNGFormat];
-    NSString *imageFileName = [NSString stringWithFormat:@"%@.png", [dateFormatter stringFromDate:[NSDate date]]];
-    NSString *imagePath = [path stringByAppendingPathComponent:imageFileName];
-    [[NSFileManager defaultManager] createFileAtPath:imagePath contents:imageData attributes:nil];
+  static NSDateFormatter *dateFormatter = nil;
+  if (dateFormatter == nil) {
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"Y-MM-d HH-mm-ss-SSS"];
+  }
+
+  NSData *imageData = [self dataWithScreenshotInPNGFormat];
+  NSString *imageFileName = [NSString stringWithFormat:@"%@.png", [dateFormatter stringFromDate:[NSDate date]]];
+  NSString *imagePath = [path stringByAppendingPathComponent:imageFileName];
+  [[NSFileManager defaultManager] createFileAtPath:imagePath contents:imageData attributes:nil];
 }
 
 #pragma mark -
@@ -120,27 +120,27 @@
 /// Returns the currently visible ViewController, including active modal ViewControllers.
 + (UIViewController *)topViewController
 {
-    NSAssert([UIApplication sharedApplication].keyWindow, @"Application should have a key window");
-    NSAssert([UIApplication sharedApplication].keyWindow.rootViewController, @"Window should have a root view controller");
-    return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+  NSAssert([UIApplication sharedApplication].keyWindow, @"Application should have a key window");
+  NSAssert([UIApplication sharedApplication].keyWindow.rootViewController, @"Window should have a root view controller");
+  return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
 + (UIViewController *)topViewControllerWithRootViewController:(UIViewController *)rootViewController
 {
-    // Check type of rootViewController and return current or topmost child ViewController.
-    // (Implementation by kleo, see http://stackoverflow.com/a/17578272/170132.)
-    
-    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
-        UITabBarController *tabBarController = (UITabBarController *)rootViewController;
-        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
-    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)rootViewController;
-        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
-    } else if (rootViewController.presentedViewController) {
-        UIViewController *presentedViewController = rootViewController.presentedViewController;
-        return [self topViewControllerWithRootViewController:presentedViewController];
-    }
-    return rootViewController;
+  // Check type of rootViewController and return current or topmost child ViewController.
+  // (Implementation by kleo, see http://stackoverflow.com/a/17578272/170132.)
+
+  if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+    UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+    return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+  } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+    UINavigationController *navigationController = (UINavigationController *)rootViewController;
+    return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
+  } else if (rootViewController.presentedViewController) {
+    UIViewController *presentedViewController = rootViewController.presentedViewController;
+    return [self topViewControllerWithRootViewController:presentedViewController];
+  }
+  return rootViewController;
 }
 
 @end
