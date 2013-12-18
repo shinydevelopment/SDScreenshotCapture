@@ -114,12 +114,9 @@
   [[NSFileManager defaultManager] createFileAtPath:imagePath contents:imageData attributes:nil];
 }
 
-#pragma mark -
-
-
-/// Returns the currently visible ViewController, including active modal ViewControllers.
 + (UIViewController *)topViewController
 {
+  // Returns the currently visible ViewController, including active modal ViewControllers.
   NSAssert([UIApplication sharedApplication].keyWindow, @"Application should have a key window");
   NSAssert([UIApplication sharedApplication].keyWindow.rootViewController, @"Window should have a root view controller");
   return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
